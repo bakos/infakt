@@ -9,5 +9,10 @@
       "name": "Jakub Kiczko",
       "email": "jakub@automater.pl"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "kiczek\\infakt\\": "src"
+    }
+  }
 }
