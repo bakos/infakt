@@ -61,6 +61,19 @@ class Invoices {
     }
 
     /**
+     * Mark invoice paid
+     *
+     * @param $id
+     * @param $paidDate
+     * @return Invoice
+     */
+    public function paid($id, $paidDate) {
+        $this->api->curl("/invoices/" . $id . "/paid", Infakt::REQUEST_POST, [
+            'paid_date' => $paidDate
+        ]);
+        return true;
+    }
+    /**
      * Delete invoice.
      *
      * @param $id
