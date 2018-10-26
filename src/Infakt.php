@@ -21,8 +21,8 @@ class Infakt {
         $_handle = curl_init();
         $_headers = [];
         $_headers[] = 'X-inFakt-ApiKey: '.$this->apiKey;
-        curl_setopt($_handle, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($_handle, CURLOPT_TIMEOUT, 10);
+        curl_setopt($_handle, CURLOPT_CONNECTTIMEOUT, 60);
+        curl_setopt($_handle, CURLOPT_TIMEOUT, 60);
         curl_setopt($_handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($_handle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($_handle, CURLOPT_CUSTOMREQUEST, $method);
