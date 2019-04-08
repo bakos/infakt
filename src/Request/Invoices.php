@@ -29,6 +29,36 @@ class Invoices {
     }
 
     /**
+     * List invoices.
+     *
+     * @param $id
+     * @return Invoice[]
+     */
+    public function list($from = null, $to = null)
+    {
+        $invoices = [];
+        $params = ['offset' => 0, 'limit' => 100, 'q' => []];
+
+        if (strtotime($from) > 0) {
+            $params['q']['invoice_date_gteq'] = $from;
+        }
+
+        if (strtotime($to) > 0) {
+            $params['q']['invoice_date_lteq'] = $to;
+        }
+
+        do {
+            $result = $this->api->curl("/invoices", Infakt::REQUEST_GET, $params);
+            foreach ($result['entities'] as $entity) {
+                $invoices[] = new Invoice($entity);
+            }
+            $params['offset'] += 100;
+        } while (!empty($result['metainfo']) && $result['metainfo']['total_count'] > $params['offset']);
+
+        return $invoices;
+    }
+
+    /**
      * Get invoice details.
      *
      * @param $id
